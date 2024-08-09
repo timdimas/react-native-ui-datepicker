@@ -240,19 +240,19 @@ const generateDayObject = (
 ) => {
   let disabled = false;
   if (minDate) {
-    disabled = date < getDate(minDate);
+    disabled = disabled || date < getDate(minDate);
   }
-  if (maxDate && !disabled) {
-    disabled = date > getDate(maxDate);
+  if (maxDate) {
+    disabled = disabled || date > getDate(maxDate);
   }
   if (disabledDates) {
     if (Array.isArray(disabledDates)) {
       const dates = disabledDates.filter((disabledDate) =>
         areDatesOnSameDay(date, disabledDate)
       );
-      disabled = dates.length > 0;
+      disabled = disabled || dates.length > 0;
     } else if (disabledDates instanceof Function) {
-      disabled = disabledDates(date);
+      disabled = disabled || disabledDates(date);
     }
   }
   return {
