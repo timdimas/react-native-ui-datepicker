@@ -10,7 +10,6 @@ import {
 import ThemeSelector, { ITheme } from './components/ThemeSelector';
 import LocaleSelector from './components/LocaleSelector';
 import GithubLink from './components/GithubLink';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import DateTimePicker, { DateType, ModeType } from 'react-native-ui-datepicker';
 import dayjs from 'dayjs';
 import 'dayjs/locale/en';
@@ -32,6 +31,7 @@ const Themes: ITheme[] = [
 
 export default function App() {
   const [mode, setMode] = useState<ModeType>('single');
+  // @ts-ignore
   const [timePicker, setTimePicker] = useState(false);
 
   const [date, setDate] = useState<DateType | undefined>();
@@ -153,34 +153,7 @@ export default function App() {
             </Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: 10,
-            marginBottom: 20,
-          }}
-        >
-          <BouncyCheckbox
-            size={20}
-            text="Time Picker"
-            fillColor={theme?.mainColor}
-            textStyle={{
-              fontSize: 14,
-              color: '#000',
-              marginLeft: -8,
-              textDecorationLine: 'none',
-            }}
-            useNativeDriver={false}
-            isChecked={timePicker}
-            disableBuiltInState
-            onPress={() => setTimePicker(!timePicker)}
-            disabled={mode !== 'single'}
-          />
-          <Text style={{ fontSize: 13, color: 'gray' }}>
-            (Works in Single mode)
-          </Text>
-        </View>
+
         <View style={styles.datePickerContainer}>
           <View style={styles.datePicker}>
             <DateTimePicker
